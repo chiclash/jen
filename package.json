@@ -1,0 +1,15 @@
+{
+  "name": "charcoal-crocs-customizer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --use-system-ca --use-env-proxy --env-file-if-exists=.env server/index.js",
+    "dev": "node --use-system-ca --use-env-proxy --env-file-if-exists=.env --watch server/index.js",
+    "test": "node --test test/*.test.js",
+    "check": "node --check server/index.js && node --check frontend/src/app.js"
+  },
+  "dependencies": { "sharp": "0.34.5" },
+  "devDependencies": { "@sparticuz/chromium": "143.0.4", "playwright-core": "1.57.0" }
+}
