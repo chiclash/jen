@@ -1,0 +1,294 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<title>CHARCOAL × Crocs · Interactive Portfolio Demo</title>
+<link rel="icon" type="image/webp" href="./a/j-paw.webp">
+<meta name="description" content="A browser-only UX/UI school prototype of the CHARCOAL × Crocs six-step cat-inspired footwear customizer. AI recognition and generation are clearly simulated.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' data:; object-src 'none'; base-uri 'self'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=Instrument+Sans:wght@400;500;600&display=swap">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="./styles/site.css">
+</head><body>
+
+
+<!-- shared SVG definitions: fur textures, filters, gradients -->
+<svg id="defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="loopG" cx="40%" cy="38%" r="60%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".42"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".32"/>
+    </radialGradient>
+    <pattern id="tex-boucle" width="11" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+      <circle cx="3" cy="3" r="4.2" fill="url(#loopG)"/><circle cx="8.5" cy="8" r="4.2" fill="url(#loopG)"/>
+    </pattern>
+    <pattern id="tex-sherpa" width="18" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <circle cx="5" cy="5" r="6.4" fill="url(#loopG)"/><circle cx="14" cy="12" r="6" fill="url(#loopG)"/><circle cx="14" cy="2" r="3.5" fill="url(#loopG)"/>
+    </pattern>
+    <pattern id="tex-plush" width="5" height="5" patternUnits="userSpaceOnUse">
+      <circle cx="2.5" cy="2.5" r="2.2" fill="url(#loopG)" opacity=".55"/>
+    </pattern>
+    <pattern id="dots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.5" fill="#DACDB8"/></pattern>
+    <filter id="fz-boucle" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+    <filter id="fz-sherpa" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="15"/></filter>
+    <filter id="fz-plush" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".16" numOctaves="1" seed="2"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+    <filter id="blot" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2"/><feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="14"/></filter>
+    <filter id="coverDrop" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3a2f25" flood-opacity=".28"/></filter>
+    <filter id="charmDrop" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#2a2420" flood-opacity=".35"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+    <linearGradient id="resinV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8F2E7"/><stop offset="1" stop-color="#E6DAC6"/></linearGradient>
+    <linearGradient id="soleV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4ECDF"/><stop offset=".7" stop-color="#E8DDCA"/><stop offset="1" stop-color="#D9CBB3"/></linearGradient>
+    <linearGradient id="resinH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#DCCFB9"/><stop offset=".25" stop-color="#F3EBDE"/><stop offset=".6" stop-color="#F1E8DA"/><stop offset="1" stop-color="#D6C8B1"/></linearGradient>
+    <linearGradient id="vol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="cupG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4D8C4"/><stop offset="1" stop-color="#F7F1E7"/></linearGradient>
+    <radialGradient id="holeG" cx="50%" cy="35%" r="65%"><stop offset="0" stop-color="#5E5650"/><stop offset="1" stop-color="#8B8074"/></radialGradient>
+    <radialGradient id="toyG" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#D4CCEE"/><stop offset="1" stop-color="#9B8ECB"/></radialGradient>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">CHARCOAL<span>×</span>Crocs</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#charcoal">Meet Charcoal</a>
+      <a href="#how">How it works</a>
+      <a href="#connection">The story</a>
+      <a class="btn btn-dark" href="#customize">Customize</a>
+    </nav>
+  </div>
+</header>
+
+<aside class="demo-banner" role="note"><div class="wrap"><b>UX/UI school prototype</b> · Browser-only demo. AI recognition and image generation are simulated. Your photos stay in this browser.</div></aside>
+<main id="top">
+  <!-- 1 HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">From One Cat to Every Cat</p>
+        <h1 id="hero-title" style="margin-top:18px">Every Cat Is <em>Unique.</em></h1>
+        <p class="lede sub">Create footwear inspired by the companion who makes your life softer.</p>
+        <div class="actions">
+          <a class="btn btn-dark" href="#customize">Customize Your Pair <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="link" href="#charcoal">Meet Charcoal</a>
+        </div>
+        <p class="tag">Life Feels Softer Together.</p>
+      </div>
+      <figure class="hero-art" style="margin:0">
+        <div class="halo"></div><div class="halo2"></div><div class="floor"></div>
+        <img class="shoe" src="a/g-side.webp" width="788" height="387" alt="Charcoal gray edition clog: mottled gray bouclé fabric upper with open vent holes, a fluffy gray heel strap cover, and cat, paw, yarn and fish Jibbitz on a cream platform sole.">
+        <span class="callout" style="left:6%;top:12%"><i></i>Personalized Jibbitz</span>
+        <span class="callout" style="left:30%;top:72%"><i></i>Fabric upper</span>
+        <span class="callout" style="right:0;top:16%"><i></i>Heel strap cover</span>
+        <figcaption class="hero-cap">Charcoal Gray edition · concept render</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 MEET CHARCOAL -->
+  <section class="meet" id="charcoal" aria-labelledby="meet-title">
+    <div class="wrap">
+      <div class="meet-grid">
+        <figure class="portrait" style="margin:0">
+          <div class="disc"></div>
+          <img class="cat" src="a/cat-portrait.webp" width="689" height="903" alt="Charcoal, a gray British Shorthair with round copper eyes, looking toward the camera.">
+          <img class="snap" src="a/cat-toy.webp" width="900" height="1199" alt="Charcoal lying on a tiled floor, playing with a feather toy." loading="lazy">
+          <figcaption>Charcoal · British Shorthair</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">Meet Charcoal</p>
+          <h2 id="meet-title">The cat behind the concept.</h2>
+          <p class="lede">Charcoal is a gray British Shorthair with a dense plush coat, a sleepy side-eye, and strong opinions about shrimp.</p>
+          <p class="body">His expressions, his long afternoon stretches and his favorite toys shaped the first shoe: a soft clog in his exact shade of gray. Every detail started as something I noticed about him at home, then became a texture, a shape or a small charm.</p>
+        </div>
+      </div>
+
+      <div class="traits">
+        <article class="trait">
+          <div class="pic"><img src="a/f-sit.webp" width="279" height="409" alt="" loading="lazy"></div>
+          <div><h3>Personality</h3><p>His unimpressed half-closed eyes became the Charcoal cat-face Jibbitz.</p></div>
+        </article>
+        <article class="trait">
+          <div class="pic"><img src="a/f-lying.webp" width="320" height="266" alt="" loading="lazy"></div>
+          <div><h3>Movements</h3><p>Long naps and lazy sprawls turned into the Sleeping Charcoal charm.</p></div>
+        </article>
+        <article class="trait">
+          <div class="pic"><img src="a/f-plush.webp" width="317" height="370" alt="" loading="lazy"></div>
+          <div><h3>Favorite things</h3><p>Shrimp, yarn and fish toys: the details owners recognize first.</p></div>
+        </article>
+      </div>
+
+      <div class="evolve">
+        <img src="a/concept-evolve.webp" width="1100" height="733" alt="Concept evolution: the original lavender plush clog beside the personalized calico version, with fur swatches matched to calico, gray and orange cats." loading="lazy">
+        <div>
+          <p class="eyebrow">From One Cat to Every Cat</p>
+          <h3 style="margin-top:12px">One gray cat started it. Every cat can wear it.</h3>
+          <p class="body">The first design was made only for Charcoal. Survey responses from other cat owners showed they wanted shoes that looked like their own cats. So the single design became a system: swap the fabric upper to match any coat, wrap the heel strap like a tail, and add charms that tell your cat's story.</p>
+          <div class="chips"><span class="chip">Emotional connection</span><span class="chip">Personalization</span><span class="chip">Playfulness</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 CUSTOMIZER -->
+  <section class="custom" id="customize" aria-labelledby="custom-title">
+    <div class="wrap">
+      <div class="custom-head">
+        <div>
+          <p class="eyebrow">Personalized design studio · Prototype</p>
+          <h2 id="custom-title">Start with a photo of your cat.</h2>
+        </div>
+        <p>Upload a few photos, confirm your cat's features and personality, and customize a pair you can save as a design specification.</p>
+      </div>
+
+      <details class="real">
+        <summary>What's real in this prototype</summary>
+        <div class="grid">
+          <div><b>Photo recognition · simulated</b>The demo samples colors on your device. It does not recognize cats with AI. You manually confirm fur, eyes, face and markings.</div>
+          <div><b>Original footwear</b>Your original cream clog photography, removable plush upper, heel strap cover and paw-shaped outsole are preserved in every view.</div>
+          <div><b>Design generation · simulated</b>Browser-drawn material swatches and photo keepsakes demonstrate the interaction. They are not AI-generated images.</div>
+          <div><b>Personalized Jibbitz</b>Photo charms use your uploaded cat pictures. Favorite-object charms use the original accessory artwork, selected from your personality choices.</div>
+          <div><b>Local saving</b>Photos and edits stay in this browser. No account, backend, paid API, payment, or production order is connected.</div>
+        </div>
+      </details>
+
+      <div class="studio" id="studio">
+        <div class="stage" aria-label="Preview">
+          <div class="stage-bar">
+            <span class="badge" id="stageBadge">Prototype illustration</span>
+            <div class="seg" role="group" aria-label="Preview angle" id="viewSeg">
+              <button type="button" data-view="side" aria-pressed="true">Side</button>
+              <button type="button" data-view="top" aria-pressed="false">Top</button>
+              <button type="button" data-view="back" aria-pressed="false" hidden>Back</button>
+              <button type="button" data-view="bottom" aria-pressed="false">Bottom</button>
+              <button type="button" data-view="detail" aria-pressed="false" hidden>Fur detail</button>
+            </div>
+          </div>
+          <div class="canvas" id="canvas" role="img" aria-label="Preview"></div>
+          <p class="caption" id="caption" aria-live="polite"></p>
+          <div class="clogrow" id="clogRow" role="group" aria-label="Clog color"></div>
+          <div class="thumbs" id="stageThumbs"></div>
+        </div>
+
+        <div class="controls">
+          <ol class="steps" id="steps" aria-label="Design steps"></ol>
+          <div class="track" aria-hidden="true"><i id="trackFill"></i></div>
+          <div id="panel"></div>
+          <div class="navrow" id="navrow">
+            <button type="button" class="btn btn-soft" id="prevBtn"><span aria-hidden="true">←</span> Back</button>
+            <button type="button" class="btn btn-dark" id="nextBtn">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 4 HOW IT WORKS -->
+  <section class="how" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="how-head">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Three parts that come off.</h2>
+        </div>
+        <p class="body">The clog underneath keeps its classic structure, ventilation holes and pivoting strap. Personalization lives in three soft, removable layers you can swap when your style changes, or when a new cat joins the family.</p>
+      </div>
+
+      <div class="parts">
+        <article class="part">
+          <div class="img"><img src="a/c-flat.webp" width="492" height="222" alt="A flat calico fabric upper panel with cream, orange and black bouclé patches." loading="lazy" style="object-fit:contain;padding:16px"></div>
+          <div class="txt">
+            <span class="n">1</span>
+            <h3>Interchangeable Fabric Upper</h3>
+            <p>A fine, short-pile faux-fur cover shaped to the front of the clog. It carries your cat's colors and markings, leaves every vent hole open, and stops at the sole line.</p>
+            <a class="link go" href="#customize">Start with your cat's photo</a>
+          </div>
+        </article>
+        <article class="part">
+          <div class="img"><img src="a/c-strap.webp" width="463" height="423" alt="Close-up of a calico fabric sleeve wrapped around the heel strap, with the cream pivot rivet still visible." loading="lazy"></div>
+          <div class="txt">
+            <span class="n">2</span>
+            <h3>Removable Wraparound Heel Strap Cover</h3>
+            <p>One fabric piece wraps the existing strap and closes with hook-and-loop. It reads like a curled tail, while the strap and pivot stay exposed and keep working.</p>
+            <a class="link go" href="#customize">Design the strap cover</a>
+          </div>
+        </article>
+        <article class="part">
+          <div class="img jib" aria-label="Six clay Jibbitz from the original concept: Charcoal's face, sleeping Charcoal, shrimp, fish, yarn ball and paw">
+            <img src="a/j-face.webp" alt="" loading="lazy"><img src="a/j-sleep.webp" alt="" loading="lazy"><img src="a/j-shrimp.webp" alt="" loading="lazy"><img src="a/j-fish.webp" alt="" loading="lazy">
+            <img src="a/j-yarn.webp" alt="" loading="lazy"><img src="a/j-paw.webp" alt="" loading="lazy">
+          </div>
+          <div class="txt">
+            <span class="n">3</span>
+            <h3>Personalized Jibbitz</h3>
+            <p>Clay-soft charms that clip into the vent holes. They stand for the habits and favorite toys that make one cat different from every other.</p>
+            <a class="link go" href="#customize">Get charm suggestions</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="translate">
+        <div>
+          <p class="eyebrow">Design translation</p>
+          <h3 style="margin-top:12px">From cat to clog.</h3>
+          <p>Each part of the shoe began as something a cat does or looks like.</p>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="tt">
+            <thead><tr><th>Inspiration</th><th></th><th>Becomes</th></tr></thead>
+            <tbody>
+              <tr><td>Fur patterns</td><td class="ar">→</td><td>Interchangeable fabric upper</td></tr>
+              <tr><td>Cat tail</td><td class="ar">→</td><td>Removable wraparound heel strap cover</td></tr>
+              <tr><td>Play behavior</td><td class="ar">→</td><td>Personalized Jibbitz</td></tr>
+              <tr><td>Paw prints</td><td class="ar">→</td><td><span class="sole"><img src="a/g-soles.webp" alt="" loading="lazy">Paw-shaped outsole, part of every pair</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 CONNECTION -->
+  <section class="conn" id="connection" aria-labelledby="conn-title">
+    <div class="wrap">
+      <p class="eyebrow">Emotional connection</p>
+      <h2 id="conn-title">More Than Footwear. A Personal Connection.</h2>
+      <div class="conn-grid">
+        <div>
+          <p class="lede">This project began with the comfort of having a companion close by. The idea is to carry a little of them with you when you leave the house.</p>
+          <p class="body" style="margin-top:18px">A coat color you would know anywhere. The patch over one eye. The toy that always ends up under the sofa. Personalized colors, patterns and charms let each owner describe their own cat in a way strangers might not notice, and the owner never forgets.</p>
+          <div class="stats">
+            <div class="stat"><b>87.5%</b><span>said a personalized product would carry emotional value</span></div>
+            <div class="stat"><b>75%</b><span>were interested or very interested in the concept</span></div>
+            <div class="stat"><b>75%</b><span>wanted their cat's facial features represented</span></div>
+          </div>
+          <p class="statnote">Online survey of 16 current and former cat owners.</p>
+        </div>
+        <figure class="conn-photo" style="margin:0"><img src="a/cat-jacket.webp" width="777" height="1036" alt="Charcoal lying upside down on a puffer jacket, paws in the air." loading="lazy"></figure>
+      </div>
+
+      <div class="family">
+        <p class="eyebrow">From One Cat to Every Cat</p>
+        <div class="family-row" id="family"></div>
+      </div>
+
+      <p class="closing">Every cat is unique.<br><em>Every connection is personal.</em></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <em>Life Feels Softer Together.</em>
+    <span>CHARCOAL × Crocs is a UI/UX portfolio concept by Pin Jen Chu. It is not affiliated with or endorsed by Crocs, and nothing here is for sale.</span>
+  </div>
+</footer>
+
+<div class="mini" id="mini" hidden><div class="mini-h"><span class="mini-l">Live preview</span><button type="button" class="mini-x" id="miniX" aria-label="Minimize live preview">–</button></div><button type="button" class="mini-c" id="miniC" aria-label="Live preview. Tap to jump to the full preview."></button></div><button type="button" class="mini-pill" id="miniPill" hidden>Show preview</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="./src/app.js"></script>
+
+
+</body></html>
