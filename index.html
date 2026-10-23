@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <title>CHARCOAL × Crocs · Interactive Portfolio Demo</title>
 <link rel="icon" type="image/webp" href="./a/j-paw.webp">
-<meta name="description" content="A browser-only UX/UI school prototype of the CHARCOAL × Crocs six-step cat-inspired footwear customizer. AI recognition and generation are clearly simulated.">
+<meta name="description" content="A browser-only UX/UI school prototype of the CHARCOAL × Crocs six-step customizer. AI is disabled; explore an explicitly labelled material demo and the original paw-tread outsole.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' data:; object-src 'none'; base-uri 'self'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,7 @@
   </div>
 </header>
 
-<aside class="demo-banner" role="note"><div class="wrap"><b>UX/UI school prototype</b> · Browser-only demo. AI recognition and image generation are simulated. Your photos stay in this browser.</div></aside>
+<aside class="demo-banner" role="note"><div class="wrap"><b>UX/UI school prototype</b> · AI recognition and image generation are unavailable. An optional interactive demo explores materials and reference examples. Your photos stay in this browser.</div></aside>
 <main id="top">
   <!-- 1 HERO -->
   <section class="hero" aria-labelledby="hero-title">
@@ -80,7 +80,7 @@
         <span class="callout" style="left:6%;top:12%"><i></i>Personalized Jibbitz</span>
         <span class="callout" style="left:30%;top:72%"><i></i>Fabric upper</span>
         <span class="callout" style="right:0;top:16%"><i></i>Heel strap cover</span>
-        <figcaption class="hero-cap">Charcoal Gray edition · concept render</figcaption>
+        <figcaption class="hero-cap">Charcoal Gray · original concept example</figcaption>
       </figure>
     </div>
   </section>
@@ -144,10 +144,10 @@
       <details class="real">
         <summary>What's real in this prototype</summary>
         <div class="grid">
-          <div><b>Photo recognition · simulated</b>The demo samples colors on your device. It does not recognize cats with AI. You manually confirm fur, eyes, face and markings.</div>
+          <div><b>Photo reference &amp; owner profile</b>Your uploaded cat remains the reference. AI analysis is unavailable, so characteristics start blank. Optional photo-color suggestions are separate from owner-confirmed traits.</div>
           <div><b>Original footwear</b>Your original cream clog photography, removable plush upper, heel strap cover and paw-shaped outsole are preserved in every view.</div>
-          <div><b>Design generation · simulated</b>Browser-drawn material swatches and photo keepsakes demonstrate the interaction. They are not AI-generated images.</div>
-          <div><b>Personalized Jibbitz</b>Photo charms use your uploaded cat pictures. Favorite-object charms use the original accessory artwork, selected from your personality choices.</div>
+          <div><b>AI generation · disabled</b>A real personalized concept requires a future AI connection. The separate interactive demo previews owner-selected colors and component layouts; it does not generate a cat character.</div>
+          <div><b>Sculpted Jibbitz references</b>The original miniature collectible artwork illustrates the intended finish. Any examples you choose are explicitly unpersonalized references, not results made from your cat.</div>
           <div><b>Local saving</b>Photos and edits stay in this browser. No account, backend, paid API, payment, or production order is connected.</div>
         </div>
       </details>
@@ -157,15 +157,18 @@
           <div class="stage-bar">
             <span class="badge" id="stageBadge">Prototype illustration</span>
             <div class="seg" role="group" aria-label="Preview angle" id="viewSeg">
+              <button type="button" data-view="photo" aria-pressed="false" hidden>Cat photo</button>
               <button type="button" data-view="side" aria-pressed="true">Side</button>
               <button type="button" data-view="top" aria-pressed="false">Top</button>
               <button type="button" data-view="back" aria-pressed="false" hidden>Back</button>
-              <button type="button" data-view="bottom" aria-pressed="false">Bottom</button>
+              <button type="button" data-view="bottom" aria-pressed="false">Bottom View</button>
               <button type="button" data-view="detail" aria-pressed="false" hidden>Fur detail</button>
             </div>
           </div>
+          <div class="cat-reference" id="catReference" hidden></div>
           <div class="canvas" id="canvas" role="img" aria-label="Preview"></div>
           <p class="caption" id="caption" aria-live="polite"></p>
+          <button type="button" class="outsole-peek" id="outsolePreview"><img src="a/g-soles.webp" width="275" height="262" alt="Original cream underside with molded paw-pad tread"><span><b>4 · Paw-shaped outsole tread</b><small>View the actual bottom artwork →</small></span></button>
           <div class="clogrow" id="clogRow" role="group" aria-label="Clog color"></div>
           <div class="thumbs" id="stageThumbs"></div>
         </div>
@@ -190,27 +193,27 @@
       <div class="how-head">
         <div>
           <p class="eyebrow">How it works</p>
-          <h2 id="how-title">Three parts that come off.</h2>
+          <h2 id="how-title">Four details. One personal pair.</h2>
         </div>
-        <p class="body">The clog underneath keeps its classic structure, ventilation holes and pivoting strap. Personalization lives in three soft, removable layers you can swap when your style changes, or when a new cat joins the family.</p>
+        <p class="body">Three removable components sit on the original cream clog: a plush upper, heel strap cover and sculpted Jibbitz. Underneath, the fourth essential feature is a molded paw-shaped outsole tread. The ventilation holes and rotating strap mechanism stay visible and functional.</p>
       </div>
 
       <div class="parts">
         <article class="part">
-          <div class="img"><img src="a/c-flat.webp" width="492" height="222" alt="A flat calico fabric upper panel with cream, orange and black bouclé patches." loading="lazy" style="object-fit:contain;padding:16px"></div>
+          <figure class="img"><img src="a/c-flat.webp" width="492" height="222" alt="Original calico upper construction study showing the removable panel shape; looped material is a reference finish." loading="lazy" style="object-fit:contain;padding:16px"><figcaption class="construction-reference">Original construction reference</figcaption></figure>
           <div class="txt">
             <span class="n">1</span>
             <h3>Interchangeable Fabric Upper</h3>
-            <p>A fine, short-pile faux-fur cover shaped to the front of the clog. It carries your cat's colors and markings, leaves every vent hole open, and stops at the sole line.</p>
+            <p>The construction reference shows the removable panel shape. The intended finish is fine, short-pile faux fur, demonstrated in the interactive material preview. It leaves the vent holes open and stops at the cream sole line.</p>
             <a class="link go" href="#customize">Start with your cat's photo</a>
           </div>
         </article>
         <article class="part">
-          <div class="img"><img src="a/c-strap.webp" width="463" height="423" alt="Close-up of a calico fabric sleeve wrapped around the heel strap, with the cream pivot rivet still visible." loading="lazy"></div>
+          <figure class="img"><img src="a/c-strap.webp" width="463" height="423" alt="Original heel strap construction reference, with the cream pivot rivet still visible; looped material is a reference finish." loading="lazy"><figcaption class="construction-reference">Original construction reference</figcaption></figure>
           <div class="txt">
             <span class="n">2</span>
             <h3>Removable Wraparound Heel Strap Cover</h3>
-            <p>One fabric piece wraps the existing strap and closes with hook-and-loop. It reads like a curled tail, while the strap and pivot stay exposed and keep working.</p>
+            <p>A removable fine-pile cover wraps the existing strap and closes with hook-and-loop. The original construction reference shows its shape; the rotating strap and pivot stay exposed and keep working.</p>
             <a class="link go" href="#customize">Design the strap cover</a>
           </div>
         </article>
@@ -222,8 +225,17 @@
           <div class="txt">
             <span class="n">3</span>
             <h3>Personalized Jibbitz</h3>
-            <p>Clay-soft charms that clip into the vent holes. They stand for the habits and favorite toys that make one cat different from every other.</p>
+            <p>Premium miniature sculpted collectibles that clip into the vent holes. These original Charcoal examples show the intended finish; new cat identities and poses require real image generation, currently disabled.</p>
             <a class="link go" href="#customize">Get charm suggestions</a>
+          </div>
+        </article>
+        <article class="part" id="paw-outsole">
+          <div class="img outsole"><img src="a/g-soles.webp" width="275" height="262" alt="Original bottom-view artwork: two cream outsoles with raised paw-shaped tread pads at the forefoot and heel" loading="lazy"></div>
+          <div class="txt">
+            <span class="n">4</span>
+            <h3>Paw-Shaped Outsole Tread</h3>
+            <p>Raised paw pads form the physical tread on the bottom of the shoe. This original underside feature is separate from the side pivot emblem and decorative charms; the cream clog sole remains intact.</p>
+            <a class="link go" href="#customize" data-show-outsole>Explore Bottom View</a>
           </div>
         </article>
       </div>
@@ -270,6 +282,7 @@
 
       <div class="family">
         <p class="eyebrow">From One Cat to Every Cat</p>
+        <p class="body">Original concept examples · Charcoal, Mochi, Ginger and Oreo illustrate possible outcomes. They are not generated results for your uploaded cat and do not determine its profile or design.</p>
         <div class="family-row" id="family"></div>
       </div>
 

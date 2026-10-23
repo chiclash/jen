@@ -1,7 +1,8 @@
 /*
  * Personalized previews are material composites on the designer's original
  * product photographs. The shoe, sole, vents and branding are not regenerated.
- * Only genuine generated material/charm assets enter this renderer.
+ * This static version composes only explicitly labelled demo materials and
+ * owner-selected sculpted reference examples. It never claims AI generation.
  */
 const assetUrl = name => new URL(`../a/${name}`, import.meta.url).href;
 
@@ -152,7 +153,8 @@ function neutralTexture() {
     neutralTexturePromise = loadImage(assetUrl('fur-tile.png')).then(image => {
       const texture = imagePixels(image);
       for (let i = 0; i < texture.data.length; i += 4) {
-        const light = 0.72 + texture.data[i] / 255 * 0.35;
+        // A restrained short-pile material study, without coarse woolly relief.
+        const light = 0.92 + texture.data[i] / 255 * 0.10;
         texture.data[i] = 226 * light;
         texture.data[i + 1] = 217 * light;
         texture.data[i + 2] = 201 * light;
@@ -232,6 +234,14 @@ async function renderComposition({ view, design = {}, generation, clogColor = nu
 export async function renderPersonalizedShoe(options) {
   const { design = {}, generation } = options;
   const view = normalizeView(options.view);
+  if (view === 'bottom') {
+    // Draw the supplied underside once, directly. No material composition,
+    // pixel roundtrip or canvas cache copy may alter even its translucent edges.
+    const config = VIEW_CONFIG.bottom;
+    const canvas = canvasFor(config.width, config.height);
+    canvas.getContext('2d').drawImage(await loadImage(assetUrl(config.base)), 0, 0);
+    return canvas;
+  }
   const key = JSON.stringify([view, design.upperOn !== false, design.strapOn !== false, design.strapStyle,
     design.accent, design.scale, generation?.id, generation?.texture?.url,
     view === 'bottom' || view === 'back' || !generation ? [] : selectedGenerationCharms(design, generation).map(c => [c.id, c.asset.url])]);
